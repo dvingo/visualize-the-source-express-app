@@ -3,6 +3,8 @@ import os
 import py2neo
 import sys
 import uuid
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 from py2neo import node, neo4j, rel
 from py2neo.neo4j import WriteBatch
@@ -53,7 +55,8 @@ def create_directory_node(name, is_root=False):
 
 def get_node_from_parent(name, parent_node):
     children = list(parent_node.match_incoming(rel_type="PARENT"))
-    matched = filter(lambda x: x.start_node['name'] == name, children)
+    matched = filter(lambda x:
+        x.start_node['name'].encode('utf-8', 'replace') == name.encode('utf-8', 'replace'), children)
     if len(matched):
         return matched[0].start_node
 
