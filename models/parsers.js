@@ -1,4 +1,3 @@
-var deepcopy = require('deepcopy');
 var parentType = 'parent';
 var childType = 'child';
 var parseDataForTreeDiagram = function(listOfRecords, callback) {
